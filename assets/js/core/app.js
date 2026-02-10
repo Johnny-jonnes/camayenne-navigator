@@ -18,6 +18,31 @@ const App = (function () {
     isLoading: true
   };
 
+  /* ─────────────────────────────────────────────────────────────────────────────
+     GESTION DU LAYOUT (Header dynamique)
+     ───────────────────────────────────────────────────────────────────────────── */
+
+  /**
+   * Ajuste la marge supérieure du contenu en fonction de la hauteur réelle du header
+   * Utile pour les mobiles où le header peut passer sur plusieurs lignes
+   */
+  function adjustLayout() {
+    const header = document.getElementById('app-header');
+    const mainContent = document.getElementById('main-content');
+
+    if (header && mainContent) {
+      const height = header.offsetHeight;
+      // Ajouter un petit buffer de sécurité (+1px)
+      const safeHeight = height + 1;
+
+      // Mettre à jour la variable CSS globale
+      document.documentElement.style.setProperty('--header-real-height', `${safeHeight}px`);
+
+      // Appliquer directement au cas où le CSS ne suivrait pas assez vite
+      mainContent.style.marginTop = `calc(${safeHeight}px + var(--safe-area-top))`;
+    }
+  }
+
   // ─────────────────────────────────────────
   // INITIALISATION
   // ─────────────────────────────────────────
@@ -33,6 +58,16 @@ const App = (function () {
       await initModules();
 
       // 3. Configurer les événements
+      // Observer les changements de taille du header (wrapping, fonts, etc.)
+      const header = document.getElementById('app-header');
+      if (header) {
+        const resizeObserver = new ResizeObserver(entries => {
+          for (let entry of entries) {
+            adjustLayout();
+          }
+        });
+        resizeObserver.observe(header);
+      } // Fin obs
       setupEventListeners();
       setupAuthEventListeners();
 
@@ -1131,6 +1166,9 @@ const App = (function () {
     showShareModal,
     closeShareModal,
 
+    // Layout
+    adjustLayout,
+
     // Initialisation
     init,
 
@@ -1178,6 +1216,7 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     try {
       App.init();
+      // Le ResizeObserver dans init s'occupera du layout
     } catch (error) {
       console.error('[App] Erreur critique lors de l\'initialisation:', error);
     }
@@ -1185,7 +1224,17 @@ if (document.readyState === 'loading') {
 } else {
   try {
     App.init();
+    // Le ResizeObserver dans init s'occupera du layout
   } catch (error) {
     console.error('[App] Erreur critique lors de l\'initialisation:', error);
   }
 }
+
+// Ajuster le layout lors du redimensionnement ou changement d'orientation
+window.addEventListener('resize', () => {
+  // Debounce pour éviter trop d'appels
+  if (window.appResizeTimer) clearTimeout(window.appResizeTimer);
+  window.appResizeTimer = setTimeout(() => App.adjustLayout(), 100);
+});
+
+window.addEventListener('load', () => App.adjustLayout());
