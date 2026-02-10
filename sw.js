@@ -3,39 +3,39 @@
  * Gestion du cache et mode offline
  */
 
-const CACHE_NAME = 'camayenne-navigator-v15';
+const CACHE_NAME = 'camayenne-navigator-v17';
 const STATIC_CACHE = 'camayenne-static-v10';
 const DYNAMIC_CACHE = 'camayenne-dynamic-v10';
 const TILES_CACHE = 'camayenne-tiles-v10';
 
 // Fichiers statiques à mettre en cache immédiatement
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/assets/css/design-system.css',
-  '/assets/css/components.css',
-  '/assets/css/layouts.css',
-  '/assets/css/map-theme.css',
-  '/assets/css/navigation.css',
-  '/assets/css/animations.css',
-  '/assets/css/auth.css',
-  '/assets/js/core/utils.js',
-  '/assets/js/core/state.js',
-  '/assets/js/core/app.js',
-  '/assets/js/core/auth.js',
-  '/assets/js/modules/geolocation.js',
-  '/assets/js/modules/address.js',
-  '/assets/js/modules/map.js',
-  '/assets/js/modules/routing.js',
-  '/assets/js/modules/places.js',
-  '/assets/js/modules/alerts.js',
-  '/assets/js/modules/offline.js',
-  '/assets/js/components/toast.js',
-  '/assets/js/components/bottom-sheet.js',
-  '/data/places.json',
-  '/data/alerts.json',
-  '/assets/icons/favicon.svg'
+  './',
+  'index.html',
+  'manifest.json',
+  'assets/css/design-system.css',
+  'assets/css/components.css',
+  'assets/css/layouts.css',
+  'assets/css/map-theme.css',
+  'assets/css/navigation.css',
+  'assets/css/animations.css',
+  'assets/css/auth.css',
+  'assets/js/core/utils.js',
+  'assets/js/core/state.js',
+  'assets/js/core/app.js',
+  'assets/js/core/auth.js',
+  'assets/js/modules/geolocation.js',
+  'assets/js/modules/address.js',
+  'assets/js/modules/map.js',
+  'assets/js/modules/routing.js',
+  'assets/js/modules/places.js',
+  'assets/js/modules/alerts.js',
+  'assets/js/modules/offline.js',
+  'assets/js/components/toast.js',
+  'assets/js/components/bottom-sheet.js',
+  'data/places.json',
+  'data/alerts.json',
+  'assets/icons/favicon.svg'
 ];
 
 // URLs externes à mettre en cache
