@@ -423,9 +423,10 @@ body.auth-locked .auth-modal-overlay {
     background: none !important;
     border: none !important;
     color: #2563EB !important;
-    font-size: 13px !important;
+    font-size: 11px !important;
+    /* Réduit pour mobile */
     font-weight: 700 !important;
-    padding: 2px 4px !important;
+    padding: 2px 0 !important;
     cursor: pointer !important;
     text-decoration: underline !important;
     display: inline-block !important;

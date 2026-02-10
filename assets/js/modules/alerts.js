@@ -201,16 +201,23 @@ const AlertsModule = (function () {
     const formatted = formatAlert(alert);
 
     if (compact) {
+      // Ne pas afficher le temps restant pour les infos générales
+      const showTime = alert.type !== 'info';
+
+      const metaHtml = `
+        <div class="alert-meta">
+          ${formatted.distanceText ? `<span>📍 ${formatted.distanceText}</span>` : ''}
+          ${showTime && formatted.timeLeftText ? `<span>⏱️ ${formatted.timeLeftText}</span>` : ''}
+        </div>
+      `;
+
       return `
         <div class="alert-card alert-${alert.type}" data-alert-id="${alert.id}">
           <div class="alert-icon">${formatted.typeIcon}</div>
           <div class="alert-content">
             <h4 class="alert-title">${alert.title}</h4>
             <p class="alert-message">${alert.message}</p>
-            <div class="alert-meta">
-              ${formatted.distanceText ? `<span>📍 ${formatted.distanceText}</span>` : ''}
-              ${formatted.timeLeftText ? `<span>⏱️ ${formatted.timeLeftText}</span>` : ''}
-            </div>
+            ${metaHtml}
           </div>
         </div>
       `;

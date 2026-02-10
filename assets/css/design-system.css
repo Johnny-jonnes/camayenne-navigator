@@ -400,7 +400,8 @@ body {
   border-radius: var(--radius-xl);
   padding: 4px;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
+  /* Réduit de 20px à 8px pour mobile */
 }
 
 .user-card-logged-out {

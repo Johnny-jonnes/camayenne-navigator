@@ -404,25 +404,15 @@ const App = (function () {
       state.userPosition = position;
       handlePositionUpdate(position);
     } catch (error) {
-      console.warn('[App] Géolocalisation échouée, utilisation du fallback:', error);
-
-      // Fallback : Centre de Camayenne pour le test
-      const fallbackPos = {
-        lat: 9.5370,
-        lng: -13.6785,
-        accuracy: 10,
-        isInCamayenne: true,
-        timestamp: Date.now()
-      };
-
-      state.userPosition = fallbackPos;
-      handlePositionUpdate(fallbackPos);
+      console.error('[App] Erreur critique de géolocalisation:', error);
 
       ToastModule.show({
-        type: 'info',
-        title: 'Mode Démo',
-        message: 'Position simulée à Camayenne pour le test.'
+        type: 'error',
+        title: 'Position indisponible',
+        message: 'Impossible de déterminer votre position réelle.'
       });
+
+      handleGeolocationError(error);
     }
   }
 
@@ -486,12 +476,15 @@ const App = (function () {
     // Générer l'adresse humaine
     const address = AddressModule.generateAddress(position);
 
+    // Afficher l'adresse
     addressElement.textContent = address.main;
 
-    // Cacher le label "Tu es à" si on est hors zone pour éviter les doublons
+    // Cacher le label statique "Tu es à" si l'adresse dynamique 
+    // commence déjà par "Tu es à" pour éviter "Tu es à Tu es à..."
     const heroLabel = document.getElementById('position-hero-label');
     if (heroLabel) {
-      heroLabel.hidden = address.isOutOfZone || !address.isValid;
+      const alreadyHasPrefix = address.main.toLowerCase().startsWith('tu es à');
+      heroLabel.hidden = alreadyHasPrefix || address.isOutOfZone || !address.isValid;
     }
 
     // Activer les boutons (toujours activés pour le démo/test)
