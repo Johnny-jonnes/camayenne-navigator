@@ -1,0 +1,313 @@
+/**
+ * STYLES CARTE ET MARKERS
+ * Design premium pour Leaflet
+ */
+
+/* ============================================
+   CONTENEUR CARTE
+   ============================================ */
+
+.map-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.page-map {
+  position: relative;
+  height: 100%;
+}
+
+/* ============================================
+   MARKER UTILISATEUR
+   ============================================ */
+
+.user-marker {
+  position: relative;
+}
+
+.user-marker-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary-400);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: user-pulse 2s ease-out infinite;
+}
+
+@keyframes user-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+.user-marker-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: var(--color-primary-500);
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 
+    0 2px 8px rgba(37, 99, 235, 0.4),
+    0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.user-marker-arrow {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 10px solid var(--color-primary-600);
+}
+
+/* ============================================
+   MARKERS DES LIEUX
+   ============================================ */
+
+.place-marker {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.place-marker-container {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-lg);
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--duration-fast) var(--ease-spring);
+}
+
+.place-marker:hover .place-marker-container {
+  transform: scale(1.15);
+}
+
+.place-marker-icon {
+  font-size: 18px;
+}
+
+/* ============================================
+   POPUPS PERSONNALISÉS
+   ============================================ */
+
+.place-popup-container .leaflet-popup-content-wrapper {
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: 0;
+}
+
+.place-popup-container .leaflet-popup-content {
+  margin: 0;
+  min-width: 200px;
+}
+
+.place-popup-container .leaflet-popup-tip {
+  background: var(--surface-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.place-popup {
+  padding: var(--space-4);
+}
+
+.place-popup-name {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  margin-bottom: var(--space-1);
+}
+
+.place-popup-category {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  margin-bottom: var(--space-3);
+}
+
+.place-popup-navigate {
+  margin-top: var(--space-2);
+}
+
+/* ============================================
+   CONTRÔLES CARTE
+   ============================================ */
+
+.map-controls {
+  position: absolute;
+  right: var(--space-4);
+  bottom: calc(var(--bottom-nav-height) + var(--safe-area-bottom) + var(--space-6));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: var(--z-raised);
+}
+
+.map-control-btn {
+  background: var(--surface-primary) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.map-control-btn:hover {
+  background: var(--color-gray-50) !important;
+}
+
+/* ============================================
+   LÉGENDE CARTE
+   ============================================ */
+
+.map-legend {
+  position: absolute;
+  left: var(--space-4);
+  bottom: calc(var(--bottom-nav-height) + var(--safe-area-bottom) + var(--space-6));
+  z-index: var(--z-raised);
+}
+
+.map-legend-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-primary);
+  border: none;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-700);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.map-legend-toggle:hover {
+  background: var(--color-gray-50);
+}
+
+.map-legend-content {
+  position: absolute;
+  bottom: calc(100% + var(--space-2));
+  left: 0;
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-4);
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.map-legend-toggle[aria-expanded="true"] + .map-legend-content,
+.map-legend:hover .map-legend-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-700);
+}
+
+.legend-item:not(:last-child) {
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+.legend-marker {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.legend-marker-user {
+  background: var(--color-primary-500);
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px var(--color-primary-200);
+  border-radius: 50%;
+}
+
+.legend-marker-health {
+  background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+  border: 1px solid #DC2626;
+}
+
+.legend-marker-security {
+  background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+  border: 1px solid #2563EB;
+}
+
+.legend-marker-admin {
+  background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+  border: 1px solid #D97706;
+}
+
+.legend-marker-transport {
+  background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+  border: 1px solid #059669;
+}
+
+.legend-marker-leisure {
+  background: linear-gradient(135deg, #E9D5FF 0%, #DDD6FE 100%);
+  border: 1px solid #7C3AED;
+}
+
+/* ============================================
+   TOOLTIP ZONE
+   ============================================ */
+
+.zone-tooltip {
+  background: var(--glass-background-elevated) !important;
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: var(--space-2) var(--space-3) !important;
+  font-weight: var(--font-weight-medium);
+  box-shadow: var(--shadow-md);
+}
+
+.zone-tooltip::before {
+  display: none;
+}
+
+/* ============================================
+   MASQUER CONTRÔLES LEAFLET PAR DÉFAUT
+   ============================================ */
+
+.leaflet-control-zoom {
+  display: none;
+}
+
+.leaflet-control-attribution {
+  background: var(--glass-background) !important;
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-md) 0 0 0;
+  font-size: 10px;
+  padding: 2px 6px;
+}
+
+.leaflet-control-attribution a {
+  color: var(--color-gray-600);
+}

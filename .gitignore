@@ -1,0 +1,14 @@
+# IDE / Tools
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Agentic data
+.gemini/
+brain/
+
+# Temp
+tmp/
+temp/
+*.log

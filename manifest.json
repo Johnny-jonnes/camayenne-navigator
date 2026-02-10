@@ -1,0 +1,103 @@
+{
+  "name": "Camayenne Navigator",
+  "short_name": "Camayenne",
+  "description": "Application de géolocalisation et navigation pour le quartier Camayenne, Dixinn, Conakry, Guinée",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFFFFF",
+  "theme_color": "#2563EB",
+  "scope": "/",
+  "display_override": [
+    "window-controls-overlay",
+    "minimal-ui"
+  ],
+  "lang": "fr",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "assets/icons/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "navigation",
+    "utilities",
+    "lifestyle"
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/home.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "label": "Écran d'accueil avec position"
+    },
+    {
+      "src": "assets/screenshots/map.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "label": "Carte interactive de Camayenne"
+    },
+    {
+      "src": "assets/screenshots/navigation.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "label": "Navigation vers un lieu"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ma position",
+      "short_name": "Position",
+      "description": "Voir ma position actuelle",
+      "url": "/#home",
+      "icons": [
+        {
+          "src": "assets/icons/favicon.svg",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Carte",
+      "short_name": "Carte",
+      "description": "Ouvrir la carte",
+      "url": "/#map",
+      "icons": [
+        {
+          "src": "assets/icons/favicon.svg",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Urgences",
+      "short_name": "Urgences",
+      "description": "Lieux d'urgence à proximité",
+      "url": "/#places?category=health",
+      "icons": [
+        {
+          "src": "assets/icons/favicon.svg",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "share_target": {
+    "action": "/share",
+    "enctype": "application/x-www-form-urlencoded",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

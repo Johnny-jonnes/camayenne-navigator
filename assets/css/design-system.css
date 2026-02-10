@@ -1,0 +1,463 @@
+/**
+ * CAMAYENNE NAVIGATOR — DESIGN SYSTEM
+ * Niveau : Apple Human Interface + Meta Design Systems
+ * 
+ * Principes :
+ * - Profondeur visuelle (layers, shadows, glass)
+ * - Hiérarchie typographique forte
+ * - Micro-interactions fluides
+ * - Accessibilité WCAG 2.1 AA
+ */
+
+/* ============================================
+   🎯 DESIGN TOKENS — FONDATION
+   ============================================ */
+
+:root {
+  /* ─────────────────────────────────────────
+     PALETTE COULEURS — GUINÉE INSPIRÉE
+     ───────────────────────────────────────── */
+
+  /* Primaire — Bleu Profond (Confiance, Navigation) */
+  --color-primary-50: #EFF6FF;
+  --color-primary-100: #DBEAFE;
+  --color-primary-200: #BFDBFE;
+  --color-primary-300: #93C5FD;
+  --color-primary-400: #60A5FA;
+  --color-primary-500: #3B82F6;
+  --color-primary-600: #2563EB;
+  --color-primary-700: #1D4ED8;
+  --color-primary-800: #1E40AF;
+  --color-primary-900: #1E3A8A;
+
+  /* Accent — Or Guinéen (Action, Importance) */
+  --color-accent-50: #FFFBEB;
+  --color-accent-100: #FEF3C7;
+  --color-accent-200: #FDE68A;
+  --color-accent-300: #FCD34D;
+  --color-accent-400: #FBBF24;
+  --color-accent-500: #F59E0B;
+  --color-accent-600: #D97706;
+  --color-accent-700: #B45309;
+
+  /* Succès — Vert (Confirmation, Sécurité) */
+  --color-success-50: #ECFDF5;
+  --color-success-100: #D1FAE5;
+  --color-success-400: #34D399;
+  --color-success-500: #10B981;
+  --color-success-600: #059669;
+
+  /* Danger — Rouge (Urgence, Alertes) */
+  --color-danger-50: #FEF2F2;
+  --color-danger-100: #FEE2E2;
+  --color-danger-400: #F87171;
+  --color-danger-500: #EF4444;
+  --color-danger-600: #DC2626;
+
+  /* Neutre — Grays Sophistiqués */
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+
+  /* ─────────────────────────────────────────
+     SURFACES & EFFETS GLASS
+     ───────────────────────────────────────── */
+
+  --surface-primary: #FFFFFF;
+  --surface-secondary: #F9FAFB;
+  --surface-elevated: #FFFFFF;
+  --surface-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Glassmorphism */
+  --glass-background: rgba(255, 255, 255, 0.72);
+  --glass-background-elevated: rgba(255, 255, 255, 0.85);
+  --glass-blur: blur(20px);
+  --glass-blur-heavy: blur(40px);
+  --glass-border: rgba(255, 255, 255, 0.18);
+
+  /* ─────────────────────────────────────────
+     OMBRES — SYSTÈME EN COUCHES (APPLE STYLE)
+     ───────────────────────────────────────── */
+
+  /* Ombres légères — éléments subtils */
+  --shadow-xs:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.06);
+
+  /* Ombres moyennes — cartes, boutons */
+  --shadow-sm:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 4px 6px rgba(0, 0, 0, 0.08);
+
+  --shadow-md:
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 10px 20px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.06);
+
+  /* Ombres fortes — modales, bottom sheets */
+  --shadow-lg:
+    0 10px 25px rgba(0, 0, 0, 0.08),
+    0 20px 48px rgba(0, 0, 0, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.06);
+
+  --shadow-xl:
+    0 20px 40px rgba(0, 0, 0, 0.12),
+    0 40px 80px rgba(0, 0, 0, 0.14),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+
+  /* Ombres colorées — boutons primaires */
+  --shadow-primary:
+    0 4px 14px rgba(37, 99, 235, 0.35),
+    0 8px 24px rgba(37, 99, 235, 0.2);
+
+  --shadow-accent:
+    0 4px 14px rgba(245, 158, 11, 0.35),
+    0 8px 24px rgba(245, 158, 11, 0.2);
+
+  /* ─────────────────────────────────────────
+     TYPOGRAPHIE — SYSTÈME COMPLET
+     ───────────────────────────────────────── */
+
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --font-family-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono: 'SF Mono', SFMono-Regular, Consolas, monospace;
+
+  /* Échelle modulaire (ratio 1.25) */
+  --font-size-xs: 0.75rem;
+  /* 12px */
+  --font-size-sm: 0.875rem;
+  /* 14px */
+  --font-size-base: 1rem;
+  /* 16px */
+  --font-size-lg: 1.125rem;
+  /* 18px */
+  --font-size-xl: 1.25rem;
+  /* 20px */
+  --font-size-2xl: 1.5rem;
+  /* 24px */
+  --font-size-3xl: 1.875rem;
+  /* 30px */
+  --font-size-4xl: 2.25rem;
+  /* 36px */
+  --font-size-5xl: 3rem;
+  /* 48px */
+
+  /* Poids typographiques */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Hauteur de ligne */
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.35;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.65;
+
+  /* Letter spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+
+  /* ─────────────────────────────────────────
+     ESPACEMENT — SYSTÈME 4px
+     ───────────────────────────────────────── */
+
+  --space-0: 0;
+  --space-1: 0.25rem;
+  /* 4px */
+  --space-2: 0.5rem;
+  /* 8px */
+  --space-3: 0.75rem;
+  /* 12px */
+  --space-4: 1rem;
+  /* 16px */
+  --space-5: 1.25rem;
+  /* 20px */
+  --space-6: 1.5rem;
+  /* 24px */
+  --space-8: 2rem;
+  /* 32px */
+  --space-10: 2.5rem;
+  /* 40px */
+  --space-12: 3rem;
+  /* 48px */
+  --space-16: 4rem;
+  /* 64px */
+  --space-20: 5rem;
+  /* 80px */
+  --space-24: 6rem;
+  /* 96px */
+
+  /* ─────────────────────────────────────────
+     RAYONS DE BORDURE
+     ───────────────────────────────────────── */
+
+  --radius-none: 0;
+  --radius-sm: 0.375rem;
+  /* 6px */
+  --radius-md: 0.5rem;
+  /* 8px */
+  --radius-lg: 0.75rem;
+  /* 12px */
+  --radius-xl: 1rem;
+  /* 16px */
+  --radius-2xl: 1.25rem;
+  /* 20px */
+  --radius-3xl: 1.5rem;
+  /* 24px */
+  --radius-full: 9999px;
+
+  /* ─────────────────────────────────────────
+     TRANSITIONS & ANIMATIONS
+     ───────────────────────────────────────── */
+
+  /* Durées */
+  --duration-instant: 50ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+  --duration-slower: 500ms;
+
+  /* Easings (Apple-style) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.8, 0.64, 1);
+
+  /* ─────────────────────────────────────────
+     Z-INDEX — COUCHES
+     ───────────────────────────────────────── */
+
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+
+  /* ─────────────────────────────────────────
+     DIMENSIONS FIXES
+     ───────────────────────────────────────── */
+
+  --header-height: 56px;
+  --bottom-nav-height: 72px;
+  --bottom-sheet-handle: 24px;
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-top: env(safe-area-inset-top, 0px);
+}
+
+/* ============================================
+   🌙 DARK MODE AUTOMATIQUE
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-primary: #0F0F0F;
+    --surface-secondary: #1A1A1A;
+    --surface-elevated: #252525;
+
+    --glass-background: rgba(30, 30, 30, 0.75);
+    --glass-background-elevated: rgba(40, 40, 40, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.08);
+
+    --color-gray-50: #1A1A1A;
+    --color-gray-100: #252525;
+    --color-gray-200: #333333;
+    --color-gray-800: #E5E7EB;
+    --color-gray-900: #F9FAFB;
+
+    --shadow-md:
+      0 4px 6px rgba(0, 0, 0, 0.3),
+      0 10px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ============================================
+   📐 RESET & BASE
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Force hidden attribute to work even with display:flex etc */
+[hidden] {
+  display: none !important;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--color-gray-900);
+  background-color: var(--surface-secondary);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   🔤 TYPOGRAPHIE — CLASSES UTILITAIRES
+   ============================================ */
+
+.text-display {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.text-headline-1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.text-headline-2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+}
+
+.text-headline-3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+}
+
+.text-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+}
+
+.text-body {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+}
+
+.text-body-emphasis {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}
+
+.text-caption {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--color-gray-500);
+}
+
+.text-overline {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-gray-500);
+}
+
+/* ============================================
+   📱 COMPOSANTS UI — PREMIUM LEVEL
+   ============================================ */
+
+/* ============================================
+   👤 COMPTE UTILISATEUR
+   ============================================ */
+
+.user-account-section {
+  background: var(--surface-secondary);
+  border-radius: var(--radius-xl);
+  padding: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.user-card-logged-out {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.user-welcome-text h3 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 2px;
+}
+
+.user-welcome-text p {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-500);
+}
+
+.user-card-logged-in {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-info h3 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 2px;
+}
+
+.badge-outline {
+  border: 1px solid var(--color-primary-500);
+  color: var(--color-primary-500);
+  background: transparent;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  text-transform: uppercase;
+}

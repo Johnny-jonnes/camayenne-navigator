@@ -1,0 +1,365 @@
+{
+  "version": "1.0.0",
+  "lastUpdate": "2024-01-15",
+  "zone": "Camayenne, Dixinn, Conakry, Guinée",
+  "places": [
+    {
+      "id": "donka-hospital",
+      "name": "Hôpital National Donka",
+      "shortName": "Hôpital Donka",
+      "category": "health",
+      "subcategory": "hospital",
+      "lat": 9.5376,
+      "lng": -13.6827,
+      "address": "Avenue de la République, Camayenne",
+      "phone": "+224 622 00 00 00",
+      "hours": "24h/24",
+      "description": "Principal hôpital national de Guinée. Urgences, consultations, hospitalisations.",
+      "services": [
+        "Urgences",
+        "Maternité",
+        "Chirurgie",
+        "Pédiatrie",
+        "Radiologie"
+      ],
+      "importance": 1,
+      "verified": true
+    },
+    {
+      "id": "clinique-pasteur",
+      "name": "Clinique Pasteur",
+      "shortName": "Clinique Pasteur",
+      "category": "health",
+      "subcategory": "clinic",
+      "lat": 9.5385,
+      "lng": -13.6760,
+      "address": "Quartier Camayenne",
+      "phone": "+224 621 00 00 00",
+      "hours": "8h-20h",
+      "description": "Clinique privée offrant des soins de qualité.",
+      "services": [
+        "Consultations",
+        "Analyses",
+        "Soins dentaires"
+      ],
+      "importance": 2,
+      "verified": true
+    },
+    {
+      "id": "pharmacie-centrale",
+      "name": "Pharmacie Centrale Camayenne",
+      "shortName": "Pharmacie Centrale",
+      "category": "health",
+      "subcategory": "pharmacy",
+      "lat": 9.5358,
+      "lng": -13.6780,
+      "address": "Avenue principale, Camayenne",
+      "phone": "+224 620 00 00 00",
+      "hours": "7h-22h",
+      "description": "Pharmacie bien approvisionnée avec garde de nuit.",
+      "services": [
+        "Médicaments",
+        "Parapharmacie",
+        "Conseils"
+      ],
+      "importance": 2,
+      "verified": true
+    },
+    {
+      "id": "centre-sante-dixinn",
+      "name": "Centre de Santé de Dixinn",
+      "shortName": "Centre Santé Dixinn",
+      "category": "health",
+      "subcategory": "health_center",
+      "lat": 9.5342,
+      "lng": -13.6805,
+      "address": "Dixinn, près du marché",
+      "phone": "+224 628 00 00 00",
+      "hours": "8h-17h",
+      "description": "Centre de santé communautaire. Vaccinations, consultations de base.",
+      "services": [
+        "Vaccinations",
+        "Consultations",
+        "Planning familial"
+      ],
+      "importance": 2,
+      "verified": true
+    },
+    {
+      "id": "commissariat-dixinn",
+      "name": "Commissariat Central de Dixinn",
+      "shortName": "Commissariat Dixinn",
+      "category": "security",
+      "subcategory": "police",
+      "lat": 9.5390,
+      "lng": -13.6815,
+      "address": "Avenue de Dixinn, Camayenne",
+      "phone": "+224 117",
+      "hours": "24h/24",
+      "description": "Commissariat principal de la commune. Urgences police.",
+      "services": [
+        "Urgences",
+        "Plaintes",
+        "Documents"
+      ],
+      "importance": 1,
+      "verified": true
+    },
+    {
+      "id": "gendarmerie-camayenne",
+      "name": "Brigade de Gendarmerie",
+      "shortName": "Gendarmerie",
+      "category": "security",
+      "subcategory": "gendarmerie",
+      "lat": 9.5375,
+      "lng": -13.6835,
+      "address": "Route de Camayenne",
+      "phone": "+224 122",
+      "hours": "24h/24",
+      "description": "Brigade de gendarmerie nationale.",
+      "services": [
+        "Sécurité",
+        "Enquêtes",
+        "Assistance"
+      ],
+      "importance": 2,
+      "verified": true
+    },
+    {
+      "id": "protection-civile",
+      "name": "Protection Civile",
+      "shortName": "Protection Civile",
+      "category": "security",
+      "subcategory": "fire",
+      "lat": 9.5405,
+      "lng": -13.6790,
+      "address": "Camayenne, vers l'université",
+      "phone": "+224 118",
+      "hours": "24h/24",
+      "description": "Sapeurs-pompiers et secours d'urgence.",
+      "services": [
+        "Incendies",
+        "Accidents",
+        "Secours"
+      ],
+      "importance": 1,
+      "verified": true
+    },
+    {
+      "id": "mairie-dixinn",
+      "name": "Mairie de Dixinn",
+      "shortName": "Mairie Dixinn",
+      "category": "admin",
+      "subcategory": "townhall",
+      "lat": 9.5511,
+      "lng": -13.6731,
+      "address": "Centre administratif de Dixinn",
+      "phone": "+224 624 00 00 00",
+      "hours": "8h-16h (Lun-Ven)",
+      "description": "Administration communale. État civil, documents administratifs.",
+      "services": [
+        "État civil",
+        "Légalisations",
+        "Certificats"
+      ],
+      "importance": 1,
+      "verified": true
+    },
+    {
+      "id": "prefecture-conakry",
+      "name": "Sous-Préfecture Dixinn",
+      "shortName": "Sous-Préfecture",
+      "category": "admin",
+      "subcategory": "prefecture",
+      "lat": 9.5388,
+      "lng": -13.6745,
+      "address": "Dixinn Centre",
+      "phone": "+224 625 00 00 00",
+      "hours": "8h-16h (Lun-Ven)",
+      "description": "Services préfectoraux déconcentrés.",
+      "services": [
+        "Autorisations",
+        "Documents officiels"
+      ],
+      "importance": 2,
+      "verified": true
+    },
+    {
+      "id": "universite-uganc",
+      "name": "Université Gamal Abdel Nasser",
+      "shortName": "Université UGANC",
+      "category": "admin",
+      "subcategory": "education",
+      "lat": 9.5444,
+      "lng": -13.6764,
+      "address": "Campus universitaire, Camayenne",
+      "phone": "+224 623 00 00 00",
+      "hours": "8h-18h (Lun-Sam)",
+      "description": "Principale université publique de Guinée.",
+      "services": [
+        "Inscriptions",
+        "Bibliothèque",
+        "Scolarité"
+      ],
+      "importance": 1,
+      "verified": true
+    },
+    {
+      "id": "gare-routiere-madina",
+      "name": "Gare Routière Camayenne",
+      "shortName": "Gare Routière",
+      "category": "transport",
+      "subcategory": "bus_station",
+      "lat": 9.5348,
+      "lng": -13.6825,
+      "address": "Carrefour Camayenne",
+      "phone": null,
+      "hours": "5h-22h",
+      "description": "Point de départ des taxis et minibus vers Conakry et banlieue.",
+      "services": [
+        "Taxis",
+        "Minibus",
+        "Transport urbain"
+      ],
+      "importance": 1,
+      "verified": true
+    },
+    {
+      "id": "station-taxi-bellevue",
+      "name": "Station Taxi Bellevue",
+      "shortName": "Taxis Bellevue",
+      "category": "transport",
+      "subcategory": "taxi",
+      "lat": 9.5380,
+      "lng": -13.6810,
+      "address": "Carrefour Bellevue",
+      "phone": null,
+      "hours": "6h-23h",
+      "description": "Station de taxis urbains. Liaison vers le centre-ville.",
+      "services": [
+        "Taxis partagés",
+        "Taxis privés"
+      ],
+      "importance": 2,
+      "verified": true
+    },
+    {
+      "id": "arret-bus-donka",
+      "name": "Arrêt Bus Donka",
+      "shortName": "Arrêt Donka",
+      "category": "transport",
+      "subcategory": "bus_stop",
+      "lat": 9.5362,
+      "lng": -13.6792,
+      "address": "Devant l'hôpital Donka",
+      "phone": null,
+      "hours": "6h-21h",
+      "description": "Arrêt principal devant l'hôpital. Lignes vers Kaloum et Ratoma.",
+      "services": [
+        "Bus urbains",
+        "Minibus"
+      ],
+      "importance": 2,
+      "verified": true
+    },
+    {
+      "id": "stade-28-septembre",
+      "name": "Stade du 28 Septembre",
+      "shortName": "Stade 28 Septembre",
+      "category": "leisure",
+      "subcategory": "stadium",
+      "lat": 9.5458,
+      "lng": -13.6729,
+      "address": "Camayenne",
+      "phone": "+224 626 00 00 00",
+      "hours": "Variable selon événements",
+      "description": "Stade national. Matchs de football, événements sportifs.",
+      "services": [
+        "Football",
+        "Événements",
+        "Concerts"
+      ],
+      "importance": 1,
+      "verified": true
+    },
+    {
+      "id": "marche-camayenne",
+      "name": "Marché de Camayenne",
+      "shortName": "Marché Camayenne",
+      "category": "leisure",
+      "subcategory": "market",
+      "lat": 9.5355,
+      "lng": -13.6770,
+      "address": "Centre Camayenne",
+      "phone": null,
+      "hours": "6h-19h",
+      "description": "Grand marché local. Fruits, légumes, produits locaux.",
+      "services": [
+        "Alimentation",
+        "Vêtements",
+        "Artisanat"
+      ],
+      "importance": 1,
+      "verified": true
+    },
+    {
+      "id": "restaurant-le-damier",
+      "name": "Restaurant Le Damier",
+      "shortName": "Le Damier",
+      "category": "leisure",
+      "subcategory": "restaurant",
+      "lat": 9.5372,
+      "lng": -13.6778,
+      "address": "Avenue principale, Camayenne",
+      "phone": "+224 629 00 00 00",
+      "hours": "11h-23h",
+      "description": "Restaurant proposant cuisine locale et internationale.",
+      "services": [
+        "Déjeuner",
+        "Dîner",
+        "Terrasse"
+      ],
+      "importance": 3,
+      "verified": true
+    },
+    {
+      "id": "mosquee-camayenne",
+      "name": "Grande Mosquée de Camayenne",
+      "shortName": "Grande Mosquée",
+      "category": "leisure",
+      "subcategory": "religious",
+      "lat": 9.5350,
+      "lng": -13.6878,
+      "address": "Camayenne Centre",
+      "phone": null,
+      "hours": "5h-22h",
+      "description": "Principale mosquée du quartier. Prières quotidiennes.",
+      "services": [
+        "Prières",
+        "Enseignement"
+      ],
+      "importance": 2,
+      "verified": true
+    },
+    {
+      "id": "cyber-cafe-connect",
+      "name": "Cyber Café Connect",
+      "shortName": "Cyber Connect",
+      "category": "leisure",
+      "subcategory": "internet",
+      "lat": 9.5368,
+      "lng": -13.6762,
+      "address": "Près de l'université",
+      "phone": "+224 627 00 00 00",
+      "hours": "8h-22h",
+      "description": "Accès internet, impressions, photocopies.",
+      "services": [
+        "Internet",
+        "Impressions",
+        "Scan"
+      ],
+      "importance": 3,
+      "verified": true
+    }
+  ]
+}
