@@ -16,7 +16,7 @@
   "dir": "ltr",
   "icons": [
     {
-      "src": "assets/icons/favicon.svg",
+      "src": "assets/icons/favicon.svg?v=13",
       "sizes": "192x192 512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"

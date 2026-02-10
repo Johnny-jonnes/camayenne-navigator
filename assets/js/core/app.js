@@ -122,6 +122,7 @@ const App = (function () {
   }
 
   function unlockApp(user) {
+    console.log('[App] Déverrouillage de l\'application...');
     const app = document.getElementById('app');
     if (app) {
       app.hidden = false;
@@ -131,13 +132,35 @@ const App = (function () {
 
     try {
       updateAuthUI(user);
+
+      // FORCER LE RECALCUL DU LAYOUT
+      // Essentiel pour PWA quand on passe de hidden à visible
+      setTimeout(() => {
+        adjustLayout();
+        if (window.MapModule && MapModule.isInitialized()) {
+          MapModule.refresh();
+        }
+      }, 50);
+
+      // Réinitialiser les formulaires
+      const forms = document.querySelectorAll('.auth-form');
+      forms.forEach(f => f.reset());
+
     } catch (err) {
       console.error('[App] Erreur lors de la mise à jour UI:', err);
     } finally {
       const authOverlay = document.getElementById('auth-modal-overlay');
-      if (authOverlay) authOverlay.classList.remove('active');
+      if (authOverlay) {
+        authOverlay.classList.remove('active');
+        // Reset manuel au cas où la classe ne suffirait pas
+        setTimeout(() => {
+          if (!authOverlay.classList.contains('active')) {
+            authOverlay.style.pointerEvents = 'none';
+          }
+        }, 300);
+      }
       document.body.classList.remove('auth-locked');
-      console.log('[App] Application déverrouillée');
+      console.log('[App] Application déverrouillée avec succès');
     }
   }
 

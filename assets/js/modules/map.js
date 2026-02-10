@@ -365,7 +365,14 @@ const MapModule = (function () {
     if (state.map) {
       setTimeout(() => {
         state.map.invalidateSize();
+        console.log('[Map] Dimensions rafraîchies (1)');
       }, 100);
+
+      // Second appel de sécurité pour PWA
+      setTimeout(() => {
+        state.map.invalidateSize();
+        console.log('[Map] Dimensions rafraîchies (2)');
+      }, 500);
     }
   }
 
