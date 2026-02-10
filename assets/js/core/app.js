@@ -125,9 +125,6 @@ const App = (function () {
         if (userName) userName.textContent = user.name || 'Utilisateur';
         if (userRole) userRole.textContent = user.role === 'admin' ? 'Administrateur' : 'Membre';
         if (userInitials) userInitials.textContent = (user.name || 'U').charAt(0).toUpperCase();
-        if (userAvatar && !userInitials) {
-          userAvatar.innerHTML = `<span>${(user.name || 'U').charAt(0).toUpperCase()}</span>`;
-        }
       }
     } else {
       if (loggedOutSection) {
@@ -522,8 +519,9 @@ const App = (function () {
     ]);
 
     // Mettre à jour les badges et listes
+    const active = AlertsModule.getActive();
     AlertsModule.updateBadge();
-    AlertsModule.renderAlertsList('alerts-container', AlertsModule.getActive().slice(0, 3), true);
+    AlertsModule.renderAlertsList('alerts-container', active.slice(0, 3), true);
   }
 
   // ─────────────────────────────────────────
@@ -778,6 +776,21 @@ const App = (function () {
       copyAddressBtn.addEventListener('click', copyAddressToClipboard);
     }
 
+    // VOIR PROFIL
+    const btnViewProfile = document.getElementById('btn-view-profile');
+    const btnCloseProfile = document.getElementById('btn-close-profile');
+    const profileOverlay = document.getElementById('profile-detail-overlay');
+
+    if (btnViewProfile) {
+      btnViewProfile.addEventListener('click', showUserProfile);
+    }
+    if (btnCloseProfile) {
+      btnCloseProfile.addEventListener('click', closeUserProfile);
+    }
+    if (profileOverlay) {
+      profileOverlay.addEventListener('click', closeUserProfile);
+    }
+
     const whatsappShareBtn = document.getElementById('btn-whatsapp-share');
     if (whatsappShareBtn) {
       whatsappShareBtn.addEventListener('click', shareOnWhatsApp);
@@ -927,6 +940,66 @@ const App = (function () {
     if (overlay) overlay.classList.remove('active');
   }
 
+  function showUserProfile() {
+    const user = AuthModule.getUser();
+    if (!user) return;
+
+    const sheet = document.getElementById('profile-detail-sheet');
+    const overlay = document.getElementById('profile-detail-overlay');
+    const body = document.getElementById('profile-detail-body');
+
+    if (body) {
+      body.innerHTML = `
+        <div class="profile-view">
+          <div class="profile-header-main">
+            <div class="profile-avatar-large">
+              <span>${(user.name || 'U').charAt(0).toUpperCase()}</span>
+            </div>
+            <h4 class="profile-name-title">${user.name}</h4>
+            <span class="badge badge-primary">${user.role === 'admin' ? 'Administrateur' : 'Membre'}</span>
+          </div>
+          
+          <div class="profile-info-grid">
+            <div class="profile-info-item">
+              <label>Identifiant</label>
+              <div class="profile-info-value">#${user.id}</div>
+            </div>
+            <div class="profile-info-item">
+              <label>Adresse Email</label>
+              <div class="profile-info-value">${user.email}</div>
+            </div>
+          </div>
+
+          <div class="profile-actions-view">
+            <button id="btn-logout-alt" class="btn btn-outline-danger w-100">
+               Se déconnecter
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Event listener pour le logout dans le profil
+      const btnLogoutAlt = body.querySelector('#btn-logout-alt');
+      if (btnLogoutAlt) {
+        btnLogoutAlt.addEventListener('click', () => {
+          closeUserProfile();
+          handleLogout();
+        });
+      }
+    }
+
+    if (sheet) sheet.classList.add('active');
+    if (overlay) overlay.classList.add('active');
+  }
+
+  function closeUserProfile() {
+    const sheet = document.getElementById('profile-detail-sheet');
+    const overlay = document.getElementById('profile-detail-overlay');
+
+    if (sheet) sheet.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+  }
+
   async function copyAddressToClipboard() {
     const addressText = document.getElementById('share-address-text');
     if (!addressText) return;
@@ -1056,6 +1129,10 @@ const App = (function () {
     // Détails lieu
     showPlaceDetail,
     closePlaceDetail,
+
+    // Profil
+    showUserProfile,
+    closeUserProfile,
 
     // Partage
     showShareModal,

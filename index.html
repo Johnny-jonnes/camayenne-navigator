@@ -12,11 +12,11 @@
     content="Application de géolocalisation et navigation pour le quartier Camayenne, Dixinn, Conakry, Guinée">
 
   <!-- Favicon & Icons -->
-  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg?v=5">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=5">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg?v=7">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=7">
 
   <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json?v=5">
+  <link rel="manifest" href="manifest.json?v=7">
 
   <!-- Preconnect pour performance -->
   <link rel="preconnect" href="https://unpkg.com">
@@ -32,13 +32,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Styles Application -->
-  <link rel="stylesheet" href="assets/css/design-system.css?v=5">
-  <link rel="stylesheet" href="assets/css/components.css?v=5">
-  <link rel="stylesheet" href="assets/css/layouts.css?v=5">
-  <link rel="stylesheet" href="assets/css/map-theme.css?v=5">
-  <link rel="stylesheet" href="assets/css/navigation.css?v=5">
-  <link rel="stylesheet" href="assets/css/animations.css?v=5">
-  <link rel="stylesheet" href="assets/css/auth.css?v=5">
+  <link rel="stylesheet" href="assets/css/design-system.css?v=7">
+  <link rel="stylesheet" href="assets/css/components.css?v=7">
+  <link rel="stylesheet" href="assets/css/layouts.css?v=7">
+  <link rel="stylesheet" href="assets/css/map-theme.css?v=7">
+  <link rel="stylesheet" href="assets/css/navigation.css?v=7">
+  <link rel="stylesheet" href="assets/css/animations.css?v=7">
+  <link rel="stylesheet" href="assets/css/auth.css?v=7">
 
   <title>Camayenne Navigator</title>
 </head>
@@ -103,7 +103,10 @@
             </div>
             <div class="user-info">
               <h3 id="user-name">Utilisateur</h3>
-              <span id="user-role" class="badge badge-outline">Membre</span>
+              <div class="user-meta-actions">
+                <span id="user-role" class="badge badge-outline">Membre</span>
+                <button id="btn-view-profile" class="btn-text-link">Voir compte</button>
+              </div>
             </div>
             <button id="btn-logout" class="btn btn-icon btn-text">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -520,6 +523,23 @@
     </div>
   </div>
 
+  <!-- PROFILE DETAIL SHEET -->
+  <div id="profile-detail-overlay" class="bottom-sheet-overlay"></div>
+  <div id="profile-detail-sheet" class="bottom-sheet">
+    <div class="bottom-sheet-handle"></div>
+    <div class="bottom-sheet-header">
+      <h3 class="bottom-sheet-title">Mon Compte</h3>
+      <button id="btn-close-profile" class="btn btn-icon btn-secondary">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div id="profile-detail-body" class="bottom-sheet-body">
+      <!-- Contenu chargé par app.js -->
+    </div>
+  </div>
+
   <!-- ============================================
        CONTENEUR TOASTS
        ============================================ -->
@@ -719,19 +739,19 @@
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <!-- Scripts -->
-  <script src="assets/js/core/utils.js?v=5"></script>
-  <script src="assets/js/core/state.js?v=5"></script>
-  <script src="assets/js/modules/geolocation.js?v=5"></script>
-  <script src="assets/js/modules/address.js?v=5"></script>
-  <script src="assets/js/modules/map.js?v=5"></script>
-  <script src="assets/js/modules/routing.js?v=5"></script>
-  <script src="assets/js/modules/places.js?v=5"></script>
-  <script src="assets/js/modules/alerts.js?v=5"></script>
-  <script src="assets/js/modules/offline.js?v=5"></script>
-  <script src="assets/js/components/toast.js?v=5"></script>
-  <script src="assets/js/components/bottom-sheet.js?v=5"></script>
-  <script src="assets/js/core/auth.js?v=5"></script>
-  <script src="assets/js/core/app.js?v=5"></script>
+  <script src="assets/js/core/utils.js?v=7"></script>
+  <script src="assets/js/core/state.js?v=7"></script>
+  <script src="assets/js/modules/geolocation.js?v=7"></script>
+  <script src="assets/js/modules/address.js?v=7"></script>
+  <script src="assets/js/modules/map.js?v=7"></script>
+  <script src="assets/js/modules/routing.js?v=7"></script>
+  <script src="assets/js/modules/places.js?v=7"></script>
+  <script src="assets/js/modules/alerts.js?v=7"></script>
+  <script src="assets/js/modules/offline.js?v=7"></script>
+  <script src="assets/js/components/toast.js?v=7"></script>
+  <script src="assets/js/components/bottom-sheet.js?v=7"></script>
+  <script src="assets/js/core/auth.js?v=7"></script>
+  <script src="assets/js/core/app.js?v=7"></script>
 
   <!-- Service Worker Registration -->
   <script>

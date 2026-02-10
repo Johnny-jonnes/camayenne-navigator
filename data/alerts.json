@@ -1,92 +1,24 @@
 {
-  "version": "1.0.0",
-  "lastUpdate": "2024-01-15",
+  "version": "1.1.0",
+  "lastUpdate": "2026-02-10",
   "zone": "Camayenne, Dixinn, Conakry, Guinée",
   "alerts": [
     {
-      "id": "alert-001",
-      "type": "warning",
-      "title": "Travaux sur l'avenue principale",
-      "message": "Des travaux de réfection de la chaussée sont en cours sur l'avenue principale de Camayenne. Circulation ralentie entre 8h et 17h.",
+      "id": "alert-official-001",
+      "type": "info",
+      "title": "Information Communale",
+      "message": "Bienvenue sur le système d'alertes officielles. Les alertes affichées ici proviennent des canaux de communication de la Mairie de Dixinn et des services publics.",
       "location": {
-        "lat": 9.5365,
+        "lat": 9.5370,
         "lng": -13.6785,
-        "radius": 200,
-        "description": "Avenue principale, près de l'hôpital"
+        "radius": 1000,
+        "description": "Zone Camayenne"
       },
-      "startDate": "2024-01-10T08:00:00Z",
-      "endDate": "2024-01-25T17:00:00Z",
-      "priority": 2,
-      "active": true,
-      "source": "Mairie de Dixinn"
-    },
-    {
-      "id": "alert-002",
-      "type": "info",
-      "title": "Campagne de vaccination",
-      "message": "Campagne de vaccination gratuite contre la méningite au Centre de Santé de Dixinn. Apportez votre carnet de vaccination.",
-      "location": {
-        "lat": 9.5342,
-        "lng": -13.6805,
-        "radius": 100,
-        "description": "Centre de Santé de Dixinn"
-      },
-      "startDate": "2024-01-15T08:00:00Z",
-      "endDate": "2024-01-20T16:00:00Z",
+      "startDate": "2026-02-01T00:00:00Z",
+      "endDate": "2026-12-31T23:59:59Z",
       "priority": 1,
       "active": true,
-      "source": "Ministère de la Santé"
-    },
-    {
-      "id": "alert-003",
-      "type": "danger",
-      "title": "Coupure d'eau programmée",
-      "message": "Coupure d'eau prévue dans le secteur Bellevue pour maintenance du réseau. Prévoyez vos réserves.",
-      "location": {
-        "lat": 9.5380,
-        "lng": -13.6810,
-        "radius": 300,
-        "description": "Secteur Bellevue et environs"
-      },
-      "startDate": "2024-01-18T06:00:00Z",
-      "endDate": "2024-01-18T18:00:00Z",
-      "priority": 3,
-      "active": true,
-      "source": "SEG (Société des Eaux)"
-    },
-    {
-      "id": "alert-004",
-      "type": "info",
-      "title": "Match au Stade 28 Septembre",
-      "message": "Match de football Syli National ce samedi à 16h. Affluence importante prévue. Arrivez tôt.",
-      "location": {
-        "lat": 9.5410,
-        "lng": -13.6820,
-        "radius": 400,
-        "description": "Stade du 28 Septembre"
-      },
-      "startDate": "2024-01-20T14:00:00Z",
-      "endDate": "2024-01-20T20:00:00Z",
-      "priority": 1,
-      "active": true,
-      "source": "Fédération Guinéenne de Football"
-    },
-    {
-      "id": "alert-005",
-      "type": "warning",
-      "title": "Marché nocturne exceptionnel",
-      "message": "Marché nocturne au Marché de Camayenne ce vendredi jusqu'à 23h. Circulation dense attendue.",
-      "location": {
-        "lat": 9.5355,
-        "lng": -13.6770,
-        "radius": 150,
-        "description": "Marché de Camayenne"
-      },
-      "startDate": "2024-01-19T17:00:00Z",
-      "endDate": "2024-01-19T23:00:00Z",
-      "priority": 2,
-      "active": true,
-      "source": "Association des Commerçants"
+      "source": "Mairie de Dixinn / Camayenne Navigator"
     }
   ]
 }

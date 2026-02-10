@@ -403,6 +403,7 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-gray-900);
   margin-bottom: var(--space-2);
+  display: block;
 }
 
 .alert-card-message {
