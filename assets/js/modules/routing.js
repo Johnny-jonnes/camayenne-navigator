@@ -97,19 +97,20 @@ const RoutingModule = (function () {
       // Afficher état de chargement
       showLoadingState();
 
-      // VÉRIFICATION DE DISTANCE (Bloquer si > 10km)
-      // On évite les calculs absurdes depuis l'étranger ou hors Conakry
-      const center = GeolocationModule.getCamayenneCenter();
-      const dist = GeolocationModule.calculateDistance(origin.lat, origin.lng, center.lat, center.lng);
+      // VÉRIFICATION DE ZONE STRICTE (Camayenne uniquement)
+      const isOriginInZone = GeolocationModule.isPointInCamayenne(origin.lat, origin.lng);
+      const isDestInZone = GeolocationModule.isPointInCamayenne(destination.lat, destination.lng);
 
-      if (dist > 10000) { // 10 km
+      if (!isOriginInZone || !isDestInZone) {
         ToastModule.show({
           type: 'warning',
-          title: 'Hors zone',
-          message: `Distance : ${(dist / 1000).toFixed(1)}km. Trop loin pour un itinéraire à pied.`
+          title: 'Hors zone Camayenne',
+          message: !isOriginInZone
+            ? "Votre position actuelle est hors du quartier Camayenne. Navigation impossible."
+            : "La destination est hors du quartier Camayenne. Navigation impossible."
         });
         hideLoadingState();
-        return Promise.reject('User too far');
+        return Promise.reject('Outside neighborhood boundaries');
       }
 
       // Construire l'URL OSRM
@@ -519,6 +520,13 @@ const RoutingModule = (function () {
           </div>
         </div>
       ` : ''}
+      
+      <button class="nav-panel-cancel" onclick="RoutingModule.stopNavigation()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+        Annuler la navigation
+      </button>
     `;
 
     panel.classList.add('active');
@@ -564,6 +572,13 @@ const RoutingModule = (function () {
         </svg>
         <span>Mode boussole • Suivez la direction indiquée</span>
       </div>
+      
+      <button class="nav-panel-cancel" onclick="RoutingModule.stopNavigation()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+        Annuler la navigation
+      </button>
     `;
 
     panel.classList.add('active');

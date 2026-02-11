@@ -242,50 +242,71 @@ const MapModule = (function () {
    * Crée un marker personnalisé pour un lieu
    */
   function createPlaceMarker(place) {
-    const iconColors = {
-      health: { bg: '#FEE2E2', color: '#DC2626', icon: '🏥' },
-      security: { bg: '#DBEAFE', color: '#2563EB', icon: '🛡️' },
-      admin: { bg: '#FEF3C7', color: '#D97706', icon: '🏛️' },
-      transport: { bg: '#D1FAE5', color: '#059669', icon: '🚕' },
-      leisure: { bg: '#E9D5FF', color: '#7C3AED', icon: '🎭' },
-      religious: { bg: '#F1F5F9', color: '#475569', icon: '🕌' }
-    };
+    const formatted = PlacesModule.formatPlaceForList(place);
 
-    const style = iconColors[place.category] || iconColors.admin;
+    let iconHtml;
+    let className = `place-marker place-marker-${place.category}`;
 
-    const icon = L.divIcon({
-      className: `place-marker place-marker-${place.category}`,
-      html: `
+    if (place.photo) {
+      className += ' has-photo';
+      iconHtml = `
+        <div class="place-marker-photo-container">
+          <img src="${formatted.thumbnailUrl}" alt="${place.name}" class="place-marker-photo">
+        </div>
+      `;
+    } else {
+      const iconColors = {
+        health: { bg: '#FEE2E2', color: '#DC2626', icon: '🏥' },
+        security: { bg: '#DBEAFE', color: '#2563EB', icon: '🛡️' },
+        admin: { bg: '#FEF3C7', color: '#D97706', icon: '🏛️' },
+        transport: { bg: '#D1FAE5', color: '#059669', icon: '🚕' },
+        leisure: { bg: '#E9D5FF', color: '#7C3AED', icon: '🎭' },
+        religious: { bg: '#F1F5F9', color: '#475569', icon: '🕌' }
+      };
+      const style = iconColors[place.category] || iconColors.admin;
+      iconHtml = `
         <div class="place-marker-container" style="background: ${style.bg}; border-color: ${style.color}">
           <span class="place-marker-icon">${style.icon}</span>
         </div>
-      `,
-      iconSize: [36, 36],
-      iconAnchor: [18, 18],
+      `;
+    }
+
+    const icon = L.divIcon({
+      className: className,
+      html: iconHtml,
+      iconSize: [40, 40],
+      iconAnchor: [20, 20],
       popupAnchor: [0, -20]
     });
 
     const marker = L.marker([place.lat, place.lng], { icon });
 
-    // Popup avec bouton "S'y rendre"
+    // Popup avec photo et bouton "S'y rendre"
     const popupContent = `
       <div class="place-popup">
-        <h4 class="place-popup-name">${place.name}</h4>
-        <p class="place-popup-category">${getCategoryLabel(place.category)}</p>
-        <button class="btn btn-primary btn-sm btn-full place-popup-navigate" 
-                onclick="App.navigateToPlace('${place.id}')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z"/>
-          </svg>
-          S'y rendre
-        </button>
+        ${place.photo ? `
+          <div class="place-popup-photo">
+            <img src="${formatted.thumbnailUrl}" alt="${place.name}">
+          </div>
+        ` : ''}
+        <div class="place-popup-content">
+          <h4 class="place-popup-name">${place.name}</h4>
+          <p class="place-popup-category">${getCategoryLabel(place.category)}</p>
+          <button class="btn btn-primary btn-sm btn-full place-popup-navigate" 
+                  onclick="App.navigateToPlace('${place.id}')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z"/>
+            </svg>
+            S'y rendre
+          </button>
+        </div>
       </div>
     `;
 
     marker.bindPopup(popupContent, {
       className: 'place-popup-container',
       closeButton: true,
-      maxWidth: 250
+      maxWidth: 220
     });
 
     // Stocker l'ID du lieu

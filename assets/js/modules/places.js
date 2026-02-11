@@ -24,102 +24,136 @@ const PlacesModule = (function () {
 
   const EMBEDDED_PLACES = [
     {
-      id: "donka-hospital",
+      id: "2",
       name: "Hôpital National Donka",
       shortName: "Hôpital Donka",
       category: "health",
-      lat: 9.5376,
-      lng: -13.6827,
-      phone: "+224 622 00 00 00",
-      hours: "24h/24",
-      importance: 1
+      lat: 9.53594,
+      lng: -13.68223,
+      description: "Grand hôpital public",
+      importance: 1,
+      photo: null
     },
     {
-      id: "commissariat-dixinn",
-      name: "Commissariat Central de Dixinn",
-      shortName: "Commissariat Dixinn",
+      id: "14",
+      name: "CMIS (Police)",
+      shortName: "CMIS Police",
       category: "security",
-      lat: 9.5390,
-      lng: -13.6815,
-      phone: "117",
-      hours: "24h/24",
-      importance: 1
+      lat: 9.53102,
+      lng: -13.68987,
+      description: "Commissariat",
+      importance: 1,
+      photo: null
     },
     {
-      id: "protection-civile",
-      name: "Protection Civile (Pompiers)",
-      shortName: "Protection Civile",
-      category: "security",
-      lat: 9.5405,
-      lng: -13.6790,
-      phone: "118",
-      hours: "24h/24",
-      importance: 1
-    },
-    {
-      id: "mairie-dixinn",
-      name: "Mairie de Dixinn",
-      shortName: "Mairie Dixinn",
+      id: "11",
+      name: "Cour Suprême de Guinée",
+      shortName: "Cour Suprême",
       category: "admin",
-      lat: 9.5511,
-      lng: -13.6731,
-      hours: "8h-16h",
-      importance: 1
+      lat: 9.53288,
+      lng: -13.69019,
+      description: "Institution judiciaire",
+      importance: 1,
+      photo: null
     },
     {
-      id: "universite-uganc",
-      name: "Université Gamal Abdel Nasser",
+      id: "21",
+      name: "Université Gamal Abdel Nasser (UGANC)",
       shortName: "Université UGANC",
       category: "admin",
-      lat: 9.5444,
-      lng: -13.6764,
-      hours: "8h-18h",
-      importance: 1
+      lat: 9.54431,
+      lng: -13.67697,
+      description: "Université",
+      importance: 1,
+      photo: null
     },
     {
-      id: "gare-routiere-madina",
-      name: "Gare Routière Camayenne",
-      shortName: "Gare Routière",
+      id: "19",
+      name: "Donka Hôpital (arrêt)",
+      shortName: "Arrêt Donka",
       category: "transport",
-      lat: 9.5348,
-      lng: -13.6825,
-      hours: "5h-22h",
-      importance: 1
+      lat: 9.53616,
+      lng: -13.68459,
+      description: "Arrêt de bus",
+      importance: 2,
+      photo: null
     },
     {
-      id: "stade-28-septembre",
+      id: "20",
       name: "Stade du 28 Septembre",
       shortName: "Stade 28 Septembre",
       category: "leisure",
-      lat: 9.5458,
-      lng: -13.6729,
-      importance: 1
+      lat: 9.54593,
+      lng: -13.67396,
+      description: "Stade",
+      importance: 1,
+      photo: null
     },
     {
-      id: "marche-camayenne",
-      name: "Marché de Camayenne",
-      shortName: "Marché Camayenne",
+      id: "10",
+      name: "Hôtel Palm Camayenne",
+      shortName: "Palm Camayenne",
       category: "leisure",
-      lat: 9.5327,
-      lng: -13.6908,
-      hours: "6h-19h",
-      importance: 1
+      lat: 9.53555,
+      lng: -13.68894,
+      description: "Hôtel de référence",
+      importance: 1,
+      photo: "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/33/1770818061188.jpg"
     },
     {
-      id: "grande-mosquee",
-      name: "Grande Mosquée de Camayenne",
-      shortName: "Grande Mosquée",
+      id: "8",
+      name: "Mosquée Fayçal",
+      shortName: "Mosquée Fayçal",
       category: "religious",
-      lat: 9.5350,
-      lng: -13.6878,
-      hours: "5h-22h",
-      importance: 1
+      lat: 9.5331303,
+      lng: -13.68411,
+      description: "Grande mosquée de Conakry",
+      importance: 1,
+      photo: null
+    },
+    {
+      id: "1",
+      name: "Pharmacie Centrale",
+      shortName: "Pharmacie Centrale",
+      category: "health",
+      lat: 9.5323,
+      lng: -13.6885,
+      importance: 2,
+      photo: "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/1/1770807566662.jpg"
+    },
+    {
+      id: "13",
+      name: "Ambassade du Mali",
+      shortName: "Ambassade Mali",
+      category: "admin",
+      lat: 9.53411,
+      lng: -13.68942,
+      description: "Mission diplomatique",
+      importance: 2,
+      photo: "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/13/1770818503487.jpg"
     }
   ];
 
   // ─────────────────────────────────────────
-  // CATÉGORIES
+  // UTILITAIRES INTERNES
   // ─────────────────────────────────────────
+
+  /**
+   * Optimise une URL d'image Supabase en demandant un redimensionnement
+   * @param {string} url URL d'origine
+   * @param {number} width Largeur souhaitée
+   * @returns {string} URL optimisée
+   */
+  function getOptimizedPhotoUrl(url, width = 400) {
+    if (!url || !url.includes('supabase.co')) return url;
+
+    // Si l'URL contient déjà des paramètres, on ajoute avec & sinon ?
+    const separator = url.includes('?') ? '&' : '?';
+
+    // Paramètres : largeur demandée, qualité 70% pour compression max sans perte visible
+    // resize=contain assure que l'image n'est pas déformée
+    return `${url}${separator}width=${width}&quality=70&resize=contain`;
+  }
 
   const CATEGORIES = {
     health: {
@@ -172,19 +206,47 @@ const PlacesModule = (function () {
 
   async function init() {
     try {
-      // Tenter de charger depuis le fichier JSON
-      const response = await fetch('data/places.json');
-      if (response.ok) {
-        const data = await response.json();
-        state.places = data.places || [];
-        console.log(`[Places] ${state.places.length} lieux chargés depuis JSON`);
+      // 1. Tenter de charger depuis Supabase (Cloud)
+      const auth = window.AuthModule || {};
+      const supabase = typeof auth.getSupabase === 'function' ? auth.getSupabase() : null;
+
+      if (supabase) {
+        console.log('[Places] Chargement depuis Supabase (Cloud)...');
+        const { data, error } = await supabase
+          .from('places')
+          .select('*')
+          .order('importance', { ascending: true });
+
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+          // Mapping des noms de colonnes DB (snake_case) vers structure App (camelCase)
+          state.places = data.map(item => ({
+            id: item.external_id || item.id,
+            name: item.name,
+            shortName: item.short_name,
+            category: item.category,
+            subcategory: item.subcategory,
+            lat: item.lat,
+            lng: item.lng,
+            address: item.address,
+            phone: item.phone,
+            description: item.description,
+            photo: item.photo,
+            importance: item.importance,
+            verified: item.verified
+          }));
+          console.log(`[Places] ${state.places.length} lieux chargés depuis le Cloud`);
+        } else {
+          console.log('[Places] Base Cloud vide, tentative JSON local...');
+          await loadFromLocalJson();
+        }
       } else {
-        throw new Error('JSON non disponible');
+        await loadFromLocalJson();
       }
     } catch (error) {
-      // Fallback sur les données embarquées
-      console.warn('[Places] Utilisation des données embarquées:', error);
-      state.places = EMBEDDED_PLACES;
+      console.warn('[Places] Erreur chargement Cloud, fallback sur local:', error.message);
+      await loadFromLocalJson();
     }
 
     // Calculer les distances si position disponible
@@ -194,6 +256,25 @@ const PlacesModule = (function () {
     state.isLoaded = true;
 
     return state.places;
+  }
+
+  /**
+   * Charge les données depuis le fichier JSON local (Fallback)
+   */
+  async function loadFromLocalJson() {
+    try {
+      const response = await fetch('data/places.json');
+      if (response.ok) {
+        const data = await response.json();
+        state.places = data.places || [];
+        console.log(`[Places] ${state.places.length} lieux chargés depuis JSON local`);
+      } else {
+        throw new Error('Fallback JSON non disponible');
+      }
+    } catch (err) {
+      console.warn('[Places] Utilisation des données EMBEDDED (Offline):', err.message);
+      state.places = EMBEDDED_PLACES;
+    }
   }
 
   // ─────────────────────────────────────────
@@ -245,7 +326,9 @@ const PlacesModule = (function () {
       filtered = filtered.filter(p =>
         p.name.toLowerCase().includes(state.searchQuery) ||
         p.shortName?.toLowerCase().includes(state.searchQuery) ||
-        p.category.toLowerCase().includes(state.searchQuery)
+        p.category.toLowerCase().includes(state.searchQuery) ||
+        p.description?.toLowerCase().includes(state.searchQuery) ||
+        p.address?.toLowerCase().includes(state.searchQuery)
       );
     }
 
@@ -304,7 +387,10 @@ const PlacesModule = (function () {
       categoryColor: category.color,
       categoryBgColor: category.bgColor,
       distanceText: formatDistance(place.distance),
-      walkingTime: estimateWalkingTime(place.distance)
+      walkingTime: estimateWalkingTime(place.distance),
+      // Versions optimisées de la photo
+      thumbnailUrl: place.photo ? getOptimizedPhotoUrl(place.photo, 150) : null,
+      fullPhotoUrl: place.photo ? getOptimizedPhotoUrl(place.photo, 600) : null
     };
   }
 
@@ -326,10 +412,16 @@ const PlacesModule = (function () {
     const formatted = formatPlaceForList(place);
 
     return `
-      <article class="place-card" data-place-id="${place.id}" onclick="App.showPlaceDetail('${place.id}')">
-        <div class="place-card-icon ${place.category}">
-          <span>${formatted.categoryIcon}</span>
-        </div>
+      <article class="place-card ${place.photo ? 'has-photo' : ''}" data-place-id="${place.id}" onclick="App.showPlaceDetail('${place.id}')">
+        ${place.photo ? `
+          <div class="place-card-photo loading-skeleton">
+            <img src="${formatted.thumbnailUrl}" alt="${place.name}" loading="lazy" decoding="async" onload="this.parentElement.classList.remove('loading-skeleton')">
+          </div>
+        ` : `
+          <div class="place-card-icon ${place.category}">
+            <span>${formatted.categoryIcon}</span>
+          </div>
+        `}
         <div class="place-card-content">
           <h4 class="place-card-name">${place.name}</h4>
           <div class="place-card-distance">
@@ -386,6 +478,11 @@ const PlacesModule = (function () {
 
     return `
       <div class="place-detail">
+        ${place.photo ? `
+          <div class="place-detail-photo loading-skeleton" style="background-image: url('${formatted.thumbnailUrl}'); background-size: cover; background-position: center;">
+            <img src="${formatted.fullPhotoUrl}" alt="${place.name}" loading="lazy" decoding="async" onload="this.parentElement.classList.remove('loading-skeleton'); this.style.opacity='1';" style="opacity: 0; transition: opacity 0.3s ease;">
+          </div>
+        ` : ''}
         <div class="place-detail-header">
           <div class="place-detail-icon ${place.category}">
             <span>${formatted.categoryIcon}</span>
@@ -468,9 +565,21 @@ const PlacesModule = (function () {
     `;
   }
 
-  // ─────────────────────────────────────────
-  // API PUBLIQUE
-  // ─────────────────────────────────────────
+  /**
+   * Pré-charge toutes les vignettes en arrière-plan
+   */
+  async function preloadAllThumbnails() {
+    const placesWithPhotos = state.places.filter(p => p.photo);
+    console.log(`[Places] Pré-chargement de ${placesWithPhotos.length} vignettes...`);
+
+    placesWithPhotos.forEach(place => {
+      const img = new Image();
+      img.src = getOptimizedPhotoUrl(place.photo, 150);
+    });
+  }
+
+  // Lancer le pré-chargement après un court délai
+  setTimeout(preloadAllThumbnails, 2000);
 
   return {
     init,

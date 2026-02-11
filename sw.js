@@ -3,10 +3,11 @@
  * Gestion du cache et mode offline
  */
 
-const CACHE_NAME = 'camayenne-navigator-v18';
-const STATIC_CACHE = 'camayenne-static-v10';
-const DYNAMIC_CACHE = 'camayenne-dynamic-v10';
-const TILES_CACHE = 'camayenne-tiles-v10';
+const CACHE_NAME = 'camayenne-navigator-v22';
+const STATIC_CACHE = 'camayenne-static-v14';
+const DYNAMIC_CACHE = 'camayenne-dynamic-v14';
+const TILES_CACHE = 'camayenne-tiles-v14';
+const IMAGES_CACHE = 'camayenne-images-v3';
 
 // Fichiers statiques à mettre en cache immédiatement
 const STATIC_ASSETS = [
@@ -67,6 +68,40 @@ self.addEventListener('install', (event) => {
               .then(response => cache.put(url, response))
               .catch(err => console.warn('[SW] Erreur cache externe:', url, err))
           )
+        );
+      }),
+      // Pré-chargement des tuiles de Camayenne (Zone Dixinn/Conakry)
+      caches.open(TILES_CACHE).then((cache) => {
+        const camayenneBounds = [9.525, -13.695, 9.548, -13.665]; // [S, W, N, E]
+        const tileUrls = getTileUrls(camayenneBounds, 16);
+        console.log(`[SW] Pré-chargement de ${tileUrls.length} tuiles initiales`);
+        return Promise.all(
+          tileUrls.map(url =>
+            fetch(url)
+              .then(resp => resp.ok ? cache.put(url, resp) : null)
+              .catch(() => null)
+          )
+        );
+      }),
+      // Pré-chargement des photos prioritaires (Lieux importance 1)
+      caches.open(IMAGES_CACHE).then((cache) => {
+        // Liste de quelques photos clés à avoir immédiatement
+        const priorityPhotos = [
+          "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/1/1770807566662.jpg",
+          "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/9/1770815395334.jpg",
+          "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/13/1770818503487.jpg"
+        ];
+        console.log(`[SW] Pré-chargement de ${priorityPhotos.length} photos prioritaires`);
+        return Promise.all(
+          priorityPhotos.map(url => {
+            // On pré-cache les versions thumbnails et full
+            const thumb = `${url}?width=150&quality=70&resize=contain`;
+            const full = `${url}?width=600&quality=70&resize=contain`;
+            return Promise.all([
+              fetch(thumb).then(r => r.ok ? cache.put(thumb, r) : null).catch(() => null),
+              fetch(full).then(r => r.ok ? cache.put(full, r) : null).catch(() => null)
+            ]);
+          })
         );
       })
     ]).then(() => {
@@ -200,6 +235,21 @@ self.addEventListener('fetch', (event) => {
   // Données JSON — Network First
   if (url.pathname.endsWith('.json')) {
     event.respondWith(networkFirst(request, DYNAMIC_CACHE));
+    return;
+  }
+
+  // Images de Supabase ou autres sources externes — Cache First (Strict Permanent)
+  if (url.pathname.match(/\.(jpg|jpeg|png|gif|webp|svg)/i) || url.hostname.includes('supabase.co')) {
+    event.respondWith(
+      caches.match(request).then(response => {
+        return response || fetch(request).then(newResponse => {
+          return caches.open(IMAGES_CACHE).then(cache => {
+            cache.put(request, newResponse.clone());
+            return newResponse;
+          });
+        });
+      })
+    );
     return;
   }
 

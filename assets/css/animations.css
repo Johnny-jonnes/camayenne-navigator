@@ -42,9 +42,11 @@
     opacity: 0;
     transform: scale(0.5) translateY(20px);
   }
+
   60% {
     transform: scale(1.1) translateY(0);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -70,6 +72,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -97,9 +100,11 @@
   0% {
     transform: translateX(-100%);
   }
+
   50% {
     transform: translateX(150%);
   }
+
   100% {
     transform: translateX(-100%);
   }
@@ -135,6 +140,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -145,6 +151,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -156,6 +163,7 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -167,6 +175,7 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -196,11 +205,25 @@
 }
 
 /* Staggered animations */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.stagger-5 {
+  animation-delay: 0.5s;
+}
 
 /* ============================================
    TRANSITIONS SPÉCIFIQUES
@@ -219,7 +242,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
   transform: scale(0);
   opacity: 0;
 }
@@ -233,7 +256,7 @@
 /* Hover lift */
 .hover-lift {
   transition: transform var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out);
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .hover-lift:hover {
@@ -246,11 +269,38 @@
   transform: scale(0.98);
 }
 
+
+/* ─────────────────────────────────────────
+   SKELETON LOADERS
+   ───────────────────────────────────────── */
+
+@keyframes pulse-skeleton {
+  0% {
+    background-color: var(--color-gray-100);
+  }
+
+  50% {
+    background-color: var(--color-gray-200);
+  }
+
+  100% {
+    background-color: var(--color-gray-100);
+  }
+}
+
+.loading-skeleton {
+  animation: pulse-skeleton 1.5s ease-in-out infinite;
+  background-color: var(--color-gray-100);
+  border-radius: inherit;
+  min-height: 20px;
+}
+
 /* ============================================
    REDUCED MOTION
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -258,7 +308,7 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .splash-screen {
     transition: none;
   }
