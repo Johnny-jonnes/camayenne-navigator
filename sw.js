@@ -89,7 +89,12 @@ self.addEventListener('install', (event) => {
         const priorityPhotos = [
           "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/1/1770807566662.jpg",
           "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/9/1770815395334.jpg",
-          "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/13/1770818503487.jpg"
+          "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/13/1770818503487.jpg",
+          "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/33/1770818061188.jpg",
+          "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/25/1770818965044.jpg",
+          "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/27/1770816569071.jpg",
+          "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/30/1770817330922.jpg",
+          "https://aeetsakqivgvrzwxvcdr.supabase.co/storage/v1/object/public/poi-photos/poi/41/1770820971753.jpg"
         ];
         console.log(`[SW] Pré-chargement de ${priorityPhotos.length} photos prioritaires`);
         return Promise.all(

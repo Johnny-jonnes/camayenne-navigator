@@ -579,7 +579,7 @@ const PlacesModule = (function () {
   }
 
   // Lancer le pré-chargement après un court délai
-  setTimeout(preloadAllThumbnails, 2000);
+  setTimeout(preloadAllThumbnails, 500);
 
   return {
     init,
