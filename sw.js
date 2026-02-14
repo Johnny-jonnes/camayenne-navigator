@@ -3,7 +3,7 @@
  * Gestion du cache et mode offline
  */
 
-const CACHE_NAME = 'camayenne-navigator-v22';
+const CACHE_NAME = 'camayenne-navigator-v23';
 const STATIC_CACHE = 'camayenne-static-v14';
 const DYNAMIC_CACHE = 'camayenne-dynamic-v14';
 const TILES_CACHE = 'camayenne-tiles-v14';
