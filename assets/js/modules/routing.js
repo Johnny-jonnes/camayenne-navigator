@@ -74,7 +74,26 @@ const RoutingModule = (function () {
 
   function init(mapInstance) {
     state.map = mapInstance;
-    state.routeLayer = L.layerGroup().addTo(state.map);
+
+    // Initialiser le layer de route s'il n'existe pas
+    if (!state.routeLayer) {
+      state.routeLayer = L.layerGroup();
+    }
+    state.routeLayer.addTo(state.map);
+
+    // S'abonner aux changements de sheet pour réafficher le panel navigation
+    if (typeof StateManager !== 'undefined') {
+      StateManager.subscribe('activeSheet', (sheetId) => {
+        // Si aucun sheet n'est ouvert et qu'on est en train de naviguer
+        if (!sheetId && (state.isNavigating || localStorage.getItem('nav_isNavigating') === 'true')) {
+          const panel = document.getElementById('navigation-panel');
+          if (panel) panel.classList.add('active');
+        }
+      });
+    }
+
+    // Restaurer l'itinéraire si présent dans le localStorage
+    restoreActiveRoute();
 
     console.log('[Routing] Module initialisé');
   }
@@ -270,6 +289,9 @@ const RoutingModule = (function () {
     state.currentRoute = route;
     state.isNavigating = true;
 
+    // Persister dans le localStorage
+    saveActiveRoute();
+
     // Afficher le panneau d'instructions
     showNavigationPanel(route);
 
@@ -372,6 +394,9 @@ const RoutingModule = (function () {
 
     state.currentRoute = route;
     state.isNavigating = true;
+
+    // Persister dans le localStorage
+    saveActiveRoute();
 
     // Afficher panneau simplifié
     showFallbackNavigationPanel(route);
@@ -644,6 +669,9 @@ const RoutingModule = (function () {
   // ─────────────────────────────────────────
 
   function stopNavigation() {
+    const hadRoute = !!state.currentRoute;
+    const routeName = state.currentRoute ? state.currentRoute.placeName : '';
+
     clearRoute();
 
     state.currentRoute = null;
@@ -654,9 +682,106 @@ const RoutingModule = (function () {
       state.watchId = null;
     }
 
+    // Fermer le panneau de navigation
     const panel = document.getElementById('navigation-panel');
     if (panel) {
       panel.classList.remove('active');
+    }
+
+    // Fermer le bottom sheet de détails s'il est ouvert
+    if (typeof BottomSheetModule !== 'undefined') {
+      BottomSheetModule.close('route-detail-sheet');
+    }
+
+    // Nettoyer l'état persisté dans localStorage
+    try {
+      localStorage.removeItem('nav_activeRoute');
+      localStorage.removeItem('nav_isNavigating');
+      localStorage.removeItem('nav_timestamp');
+    } catch (e) {
+      // Silencieux si localStorage indisponible
+    }
+
+    // Mettre à jour le StateManager si nécessaire
+    if (typeof StateManager !== 'undefined') {
+      StateManager.actions.stopNavigation();
+    }
+
+    // Afficher un toast de confirmation
+    if (hadRoute && typeof ToastModule !== 'undefined') {
+      ToastModule.show({
+        type: 'info',
+        title: 'Itinéraire annulé',
+        message: routeName ? `Navigation vers ${routeName} terminée` : 'La navigation a été arrêtée'
+      });
+    }
+
+    console.log('[Routing] Navigation arrêtée');
+  }
+
+  /**
+   * Sauvegarde l'itinéraire actuel dans le localStorage
+   */
+  function saveActiveRoute() {
+    if (!state.currentRoute) return;
+    try {
+      localStorage.setItem('nav_activeRoute', JSON.stringify(state.currentRoute));
+      localStorage.setItem('nav_isNavigating', 'true');
+      localStorage.setItem('nav_timestamp', Date.now().toString());
+
+      // Synchroniser avec StateManager
+      if (typeof StateManager !== 'undefined') {
+        StateManager.actions.startNavigation(state.currentRoute);
+      }
+    } catch (e) {
+      console.warn('[Routing] Échec sauvegarde itinéraire:', e);
+    }
+  }
+
+  /**
+   * Restaure l'itinéraire depuis le localStorage
+   */
+  async function restoreActiveRoute() {
+    try {
+      const savedRoute = localStorage.getItem('nav_activeRoute');
+      const isNavigating = localStorage.getItem('nav_isNavigating') === 'true';
+      const timestamp = localStorage.getItem('nav_timestamp');
+
+      // Si l'itinéraire date de plus de 4 heures, on l'expire
+      if (timestamp && (Date.now() - parseInt(timestamp) > 4 * 60 * 60 * 1000)) {
+        localStorage.removeItem('nav_activeRoute');
+        localStorage.removeItem('nav_isNavigating');
+        localStorage.removeItem('nav_timestamp');
+        return;
+      }
+
+      if (savedRoute && isNavigating) {
+        const route = JSON.parse(savedRoute);
+        console.log('[Routing] Restauration itinéraire:', route.placeName);
+
+        // Attendre que la carte soit initialisée (important après refresh)
+        const checkMap = setInterval(() => {
+          if (state.map) {
+            clearInterval(checkMap);
+            displayRoute(route);
+
+            // Si on est sur une autre page que la carte, masquer le layer pour l'instant
+            // mais garder l'état 'isNavigating'
+            if (window.location.hash !== '#map' && window.location.hash !== '') {
+              const panel = document.getElementById('navigation-panel');
+              if (panel) panel.classList.remove('active');
+            }
+          }
+        }, 100);
+
+        // Timeout de sécurité pour arrêter de chercher la carte
+        setTimeout(() => clearInterval(checkMap), 5000);
+      }
+    } catch (e) {
+      console.warn('[Routing] Échec restauration itinéraire:', e);
+      localStorage.removeItem('nav_activeRoute');
+      localStorage.removeItem('nav_isNavigating');
+      localStorage.removeItem('nav_timestamp');
     }
   }
 
