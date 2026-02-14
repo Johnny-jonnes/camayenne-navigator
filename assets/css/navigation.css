@@ -362,3 +362,134 @@
 .nav-panel-cancel svg {
   flex-shrink: 0;
 }
+
+/* ============================================
+   ACTIONS DU PANNEAU (Ajouté)
+   ============================================ */
+.nav-panel-actions {
+  display: flex !important;
+  gap: 12px !important;
+  margin-top: 16px !important;
+}
+
+.nav-panel-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.nav-btn-details {
+  background: var(--color-gray-100);
+  color: var(--color-gray-700);
+}
+
+.nav-btn-details:hover {
+  background: var(--color-gray-200);
+}
+
+.nav-btn-cancel {
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.nav-btn-cancel:hover {
+  background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+  transform: translateY(-1px);
+}
+
+/* DÉTAILS ITINÉRAIRE */
+.route-summary-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: #f0f7ff;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.summary-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.summary-label {
+  font-size: 11px;
+  color: #2563eb;
+  text-transform: uppercase;
+}
+
+.summary-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.summary-divider {
+  width: 1px;
+  height: 30px;
+  background: #bfdbfe;
+}
+
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step-item {
+  display: flex;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+}
+
+.step-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 8px;
+  color: #2563eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-instruction {
+  font-size: 14px;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.step-meta {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Bouton Annuler dans les détails */
+.route-detail-cancel-btn {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
